@@ -4,7 +4,8 @@ rule-anchor:
   Sub_Parameters: &SP {type: http, interval: 86400, health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 600}, header: {User-Agent: ["clash.meta", "clash", "mihomo"]}}
   
   # DNS参数
-  Dns_Public: &DP ['https://223.5.5.5/dns-query']
+  Dns_Default: &DF ['1.1.1.1', '114.114.114.114']
+  Dns_Public: &DP ['https://dns.alidns.com/dns-query', 'https://cloudflare-dns.com/dns-query']
   Dns_Direct: &DD ['223.5.5.5', '119.29.29.29']
   
   # 节点策略
@@ -14,10 +15,10 @@ rule-anchor:
   
   # 节点筛选
   Hongkong: &HK "(?=.*(🇭🇰|港|HK|(?i)hong))^((?!(台|日|韩|新|美)).)*$"
-  Singapore: &SGP "(?=.*(🇸🇬|新|狮|SGP|(?i)singapore))^((?!(港|台|日|韩|美)).)*$"
+  Singapore: &SGP "(?=.*(🇸🇬|新|狮|SG|SGP|(?i)singapore))^((?!(港|台|日|韩|美)).)*$"
   America: &USA "(?=.*(🇺🇸|美|US|(?i)states|america))^((?!(港|台|日|韩|新)).)*$"
   Japan: &JP "(?=.*(🇯🇵|日|JP(?i)japan))^((?!(港|台|韩|新|美)).)*$"
-  Other: &OR "^((?!(🇭🇰|港|HK|hong|🇸🇬|新|狮|SGP|singapore|🇺🇸|美|US|states|america|🇯🇵|日|JPjapan|官网|剩余|套餐|流量|套餐|订阅|直连|GB|expireDate|traffic)).)*$"
+  Other: &OR "^((?!(🇭🇰|港|HK|hong|🇸🇬|新|狮|SG|SGP|singapore|🇺🇸|美|US|states|america|🇯🇵|日|JPjapan|官网|剩余|套餐|流量|套餐|订阅|直连|GB|expireDate|traffic)).)*$"
   Exclude: &EX "^((?!(官网|剩余|套餐|流量|套餐|订阅|直连|GB|expireDate|traffic)).)*$"
   Combo: &CB "(?=.*(🇭🇰|港|HK|(?i)hong|🇯🇵|日|JP(?i)japan|🇸🇬|新|狮|SGP|(?i)singapore|🇺🇸|美|US|(?i)states|america))^((?!(官网|剩余|套餐|流量|套餐|订阅|直连|GB|expireDate|traffic)).)*$"
   
@@ -119,31 +120,25 @@ tun:
 # DNS模块
 dns:
   enable: true
-  listen: 0.0.0.0:0000
+  cache-algorithm: arc
+  listen: 0.0.0.0:1053
   ipv6: true
   respect-rules: true
   enhanced-mode: fake-ip
-  fake-ip-range: 0.0.0.0/8
+  fake-ip-range: 198.18.0.1/16
   fake-ip-filter-mode: blacklist
+  default-nameserver: *DF
   proxy-server-nameserver: *DP
   nameserver: *DD
   fake-ip-filter:
-    - "rule-set:private_domain,cn_domain"
-    - "+.services.googleapis.cn"
-    - "+.xn--ngstr-lra8j.com"
-    - "time.*.com"
-    - "+.pool.ntp.org"
-    - "+.ntp.tencent.com"
-    - "+.ntp1.aliyun.com"
-    - "+.ntp.ntsc.ac.cn"
-    - "+.cn.ntp.org.cn"
+    - "rule-set:fakeipfilter_domain"
  
 # 出站策略
 proxy-groups:
   - {name: AI, <<: *S1, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Bahamut.png"}
   - {name: YouTube, <<: *S1, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png"}
   - {name: Emby, <<: *S1, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Emby.png"}
-  - {name: Forluma 1, <<: *S1, icon: "https://raw.githubusercontent.com/INnoW/rule/refs/heads/main/Forluma%201.png"}
+  - {name: Forluma 1, <<: *S1, icon: "https://raw.githubusercontent.com/INnoW/Mihomo/refs/heads/main/Icon/Forluma%201.png"}
   - {name: Apple TV, <<: *S1, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple_TV.png"}
   - {name: Apple, <<: *S3, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple_2.png"}
   - {name: TikTok, <<: *S1, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TikTok.png"}
@@ -214,11 +209,12 @@ rules:
 
 # 远程规则集 
 rule-providers: 
-  proxy_class: { <<: *class, url: "https://github.com/INnoW/rule/raw/refs/heads/main/proxy.list"}
-  emby_class: { <<: *class, url: "https://github.com/INnoW/rule/raw/refs/heads/main/Embylite.list"}
-  formula 1_class: { <<: *class, url: "https://raw.githubusercontent.com/INnoW/rule/refs/heads/main/Formula%201.list"}
-  google_voice_class: { <<: *class, url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/GoogleVoice/GoogleVoice.list"}
+  proxy_class: { <<: *class, url: "https://github.com/INnoW/Mihomo/raw/refs/heads/main/Ruleset/Class/Proxy.list"}
+  emby_class: { <<: *class, url: "https://github.com/INnoW/Mihomo/raw/refs/heads/main/Ruleset/Class/Embylite.list"}
+  formula 1_class: { <<: *class, url: "https://github.com/INnoW/Mihomo/raw/refs/heads/main/Ruleset/Class/Formula%201.list"}
+  google_voice_class: { <<: *class, url: "https://github.com/INnoW/Mihomo/raw/refs/heads/main/Ruleset/Class/GoogleVoice.list"}
   proxy_media_class: { <<: *class, url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/ProxyMedia.list"}
+  fakeipfilter_domain: {<<: *domain, url: "https://github.com/INnoW/Mihomo/raw/refs/heads/main/Ruleset/Domain/fakeip-filter.mrs"}
   private_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs"}
   ai_domain: {  <<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/category-ai-!cn.mrs" }
   twitter_domain: { <<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/twitter.mrs"}
