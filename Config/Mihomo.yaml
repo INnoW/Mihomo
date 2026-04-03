@@ -92,20 +92,7 @@ sniffer:
     - "+.amazonaws.com"
     - "+.media.dssott.com" 
   skip-domain:
-    - "rule-set:private_domain,cn_domain"
-    - "dlg.io.mi.com"
-    - Mijia Cloud
-    - "+.push.apple.com"
-    - "+.apple.com"
-    - "+.wechat.com"
-    - "+.qpic.cn"
-    - "+.qq.com"
-    - "+.wechatapp.com"
-    - "+.vivox.com"
-    - "+.oray.com"
-    - "+.sunlogin.net"
-    - "+.msftconnecttest.com"
-    - "+.msftncsi.com"
+    - "rule-set:fakeipfilter_domain,private_domain,cn_domain"
 
 # 入站  
 tun:
@@ -131,7 +118,7 @@ dns:
   proxy-server-nameserver: *DP
   nameserver: *DD
   fake-ip-filter:
-    - "rule-set:fakeipfilter_domain"
+    - "rule-set:fakeipfilter_domain,private_domain,cn_domain"
  
 # 出站策略
 proxy-groups:
@@ -210,16 +197,14 @@ rules:
 # 远程规则集 
 rule-providers: 
   proxy_class: { <<: *class, url: "https://github.com/INnoW/Mihomo/raw/refs/heads/main/Ruleset/Class/Proxy.list"}
-  emby_class: { <<: *class, url: "https://github.com/INnoW/Mihomo/raw/refs/heads/main/Ruleset/Class/Embylite.list"}
-  formula 1_class: { <<: *class, url: "https://github.com/INnoW/Mihomo/raw/refs/heads/main/Ruleset/Class/Formula%201.list"}
-  google_voice_class: { <<: *class, url: "https://github.com/INnoW/Mihomo/raw/refs/heads/main/Ruleset/Class/GoogleVoice.list"}
-  proxy_media_class: { <<: *class, url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/ProxyMedia.list"}
   fakeipfilter_domain: {<<: *domain, url: "https://github.com/INnoW/Mihomo/raw/refs/heads/main/Ruleset/Domain/fakeip-filter.mrs"}
   private_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs"}
   ai_domain: {  <<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/category-ai-!cn.mrs" }
   twitter_domain: { <<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/twitter.mrs"}
   telegram_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs"}
   youtube_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs"}
+  emby_class: { <<: *domain, url: "https://github.com/INnoW/Mihomo/raw/refs/heads/main/Ruleset/Domain/Embylite.mrs"}
+  formula 1_class: { <<: *domain, url: "https://github.com/INnoW/Mihomo/raw/refs/heads/main/Ruleset/Domain/Formula%201.mrs"}
   apple_tv_domain: { <<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/apple-tvplus.mrs"}
   apple_domain: { <<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/apple.mrs"}
   tiktok_domain: { <<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/tiktok.mrs"}
@@ -229,10 +214,12 @@ rule-providers:
   speedtest_domain:  { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/ookla-speedtest.mrs"}
   onedrive_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/onedrive.mrs"}
   microsoft_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs"}
+  google_voice_class: { <<: *domain, url: "https://github.com/INnoW/Mihomo/raw/refs/heads/main/Ruleset/Domain/GoogleVoice.mrs"}
   google_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs"}
   steam_domain: { <<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/steam.mrs"}
   epic_domain: { <<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/epicgames.mrs"}
   gfw_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/gfw.mrs"}
+  proxy_media_class: { <<: *domain, url: "https://github.com/INnoW/Mihomo/raw/refs/heads/main/Ruleset/Domain/ProxyMedia.mrs"}
   geolocation-!cn: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs"}
   cn_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"}
   private_ip: {<<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.mrs"}
