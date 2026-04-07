@@ -1,5 +1,5 @@
 # 名称： Mihomo Ruleset
-# 版本： Ver.4.1
+# 版本： Ver.4.2
 # 日期： 2026年4月7日
 # 地址： https://github.com/INnoW/Mihomo
 # 说明： ①本文件适用于Mihomo核心的工具使用，如：OpenWrt（OpenClash/Nikki 插件）、Stash、FlClash； ②使用前需补充完整 “订阅链接” 与 “机场名”，并将 “nameserver” 修改为运营商提供的 DNS 地址;
@@ -74,11 +74,21 @@ profile:
   store-selected: true                                                  # 保存选择  记住上次选择的节点和策略组
   store-fake-ip: true                                                   # 保存映射  Fake-IP 映射以加快 DNS 命中
 
+# 地理数据
+#geo-auto-update: true                                                   # 自动更新  geodata
+#geo-update-interval: 48                                                 # 更新间隔  单位：小时
+#geodata-mode: true                                                      # 数据分流  使用数据集进行规则与分流匹配
+#geox-url:
+#  geosite: https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat
+#  geoip:   https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip-lite.dat
+#  mmdb:    https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/country-lite.mmdb
+#  asn:     https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/GeoLite2-ASN.mmdb
+
 # 控制面板
-external-controller: 0.0.0.0:9090
-secret: ""
-external-ui: "/etc/mihomo/run/ui"
-external-ui-name: zashboard
+external-controller: 0.0.0.0:9988                                       # 面板地址
+external-ui-name: zashboard                                             # 面板名称
+external-ui: ui                                                         # 面板目录
+secret: ""                                                              # 面板密码 （留空表示不启用）
 external-ui-url: "https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip"
 
 # 嗅探
@@ -99,7 +109,20 @@ sniffer:
     - "+.amazonaws.com"                                                 # 强制嗅探  AWS 云服务
     - "+.media.dssott.com"                                              # 强制嗅探  Disney+ 流媒体
   skip-domain:
-    - "rule-set:fakeipfilter_domain,private_domain,cn_domain"           # 跳过嗅探  常见国内局域网域名后缀
+    - "+.apple.com"                                                     # 跳过嗅探  苹果服务
+    - Mijia Cloud                                                       # 跳过嗅探  米家云服务
+    - dlg.io.mi.com                                                     # 跳过嗅探  小米设备通信
+    - "+.oray.com"                                                      # 跳过嗅探  花生壳服务
+    - "+.sunlogin.net"                                                  # 跳过嗅探  向日葵远程控制
+    - "+.apple.com"                                                     # 跳过嗅探  苹果相关服务
+    - "+.push.apple.com"                                                # 跳过嗅探  苹果推送服务
+    - "+.wechat.com"                                                    # 跳过嗅探  微信相关服务
+    - "+.wechatapp.com"                                                 # 跳过嗅探  微信软件相关服务
+    - "+.qpic.cn"                                                       # 跳过嗅探  腾讯内容分发服务
+    - "+.qq.com"                                                        # 跳过嗅探  腾讯QQ服务
+    - "+.vivox.com"                                                     # 跳过嗅探  Unity游戏语音Vivox服务
+    - "+.msftncsi.com"                                                  # 跳过嗅探  微软网络连接状态服务
+    - "+.msftconnecttest.com"                                           # 跳过嗅探  苹果推送服务
 
 # TUN配置 
 tun:
