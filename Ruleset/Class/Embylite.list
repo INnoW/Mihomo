@@ -2,8 +2,8 @@
 
 # > SNTP
 DOMAIN-SUFFIX,cn2gias.uk
-DOMAIN-SUFFIX,array2026.cc
 DOMAIN-SUFFIX,array2026.com
+DOMAIN,server2.cn2gias.uk
 
 # > Nya Media
 DOMAIN-SUFFIX,bangumi.ca
