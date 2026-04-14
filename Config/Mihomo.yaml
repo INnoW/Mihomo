@@ -202,7 +202,7 @@ rules:
   - RULE-SET,twitter_domain,Twitter(X)
   - RULE-SET,telegram_domain,Telegram
   - RULE-SET,youtube_domain,YouTube
-  - RULE-SET,emby_domain,Emby
+  - RULE-SET,emby_class,Emby
   - RULE-SET,formula 1_domain,Forluma 1
   - RULE-SET,apple_tv_domain,Apple TV
   - RULE-SET,apple_domain,Apple
@@ -234,6 +234,7 @@ rules:
 rule-providers: 
   # 域名规则（文本规则）
   proxy_class: { <<: *class, url: "https://github.com/INnoW/Mihomo/raw/refs/heads/main/Ruleset/Class/Proxy.list"}
+  emby_class: { <<: *class, url: "https://github.com/INnoW/Mihomo/raw/refs/heads/main/Ruleset/Class/Embylite.list"}
 
   # 域名规则（二进制规则）
   fakeipfilter_domain: {<<: *domain, url: "https://github.com/INnoW/Mihomo/raw/refs/heads/main/Ruleset/Domain/fakeip-filter.mrs"}
