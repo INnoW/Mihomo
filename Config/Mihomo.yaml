@@ -1,6 +1,6 @@
 # 名称： Mihomo Ruleset
-# 版本： Ver.4.2
-# 日期： 2026年4月7日
+# 版本： Ver.4.3
+# 日期： 2026年4月17日
 # 地址： https://github.com/INnoW/Mihomo
 # 说明： ①本文件适用于Mihomo核心的工具使用，如：OpenWrt（OpenClash/Nikki 插件）、Stash、FlClash； ②使用前需补充完整 “订阅链接” 与 “机场名”，并将 “nameserver” 修改为运营商提供的 DNS 地址;
 # ※※※※※※※※※※※※※※※ 锚点定义 ※※※※※※※※※※※※※※※
@@ -19,13 +19,13 @@ rule-anchor:
   Direct: &S3 {type: select, proxies: [🎯 DIRECT, 🇭🇰 香港节点, 🇸🇬 狮城节点, 🇺🇲 美国节点, 🇯🇵 日本节点, 🐽 手动切换1, 🐽 手动切换2, 🛩️ 故障转移]}
   
   # 节点筛选锚点
-  Hongkong: &HK "(?=.*(🇭🇰|港|HK|(?i)hong))^((?!(台|日|韩|新|美)).)*$"
-  Singapore: &SGP "(?=.*(🇸🇬|新|狮|SG|SGP|(?i)singapore))^((?!(港|台|日|韩|美)).)*$"
-  America: &USA "(?=.*(🇺🇸|美|US|(?i)states|america))^((?!(港|台|日|韩|新)).)*$"
-  Japan: &JP "(?=.*(🇯🇵|日|JP(?i)japan))^((?!(港|台|韩|新|美)).)*$"
-  Other: &OR "^((?!(🇭🇰|港|HK|hong|🇸🇬|新|狮|SG|SGP|singapore|🇺🇸|美|US|states|america|🇯🇵|日|JPjapan|官网|剩余|套餐|流量|套餐|订阅|直连|GB|expireDate|traffic)).)*$"
-  Exclude: &EX "^((?!(官网|剩余|套餐|流量|套餐|订阅|直连|GB|expireDate|traffic)).)*$"
-  Combo: &CB "(?=.*(🇭🇰|港|HK|(?i)hong|🇯🇵|日|JP(?i)japan|🇸🇬|新|狮|SGP|(?i)singapore|🇺🇸|美|US|(?i)states|america))^((?!(官网|剩余|套餐|流量|套餐|订阅|直连|GB|expireDate|traffic)).)*$"
+  Hongkong: &HK "(?=.*(🇭🇰|港|(?i)HK|(?i)hong))^((?!(台|日|韩|新|美)).)*$"
+  Singapore: &SGP "(?=.*(🇸🇬|新|狮|(?i)SG|(?i)SGP|(?i)singapore))^((?!(港|台|日|韩|美)).)*$"
+  America: &USA "(?=.*(🇺🇸|美|(?i)US|(?i)states|(?i)america))^((?!(港|台|日|韩|新)).)*$"
+  Japan: &JP "(?=.*(🇯🇵|日|(?i)JP(?i)japan))^((?!(港|台|韩|新|美)).)*$"
+  Other: &OR "^((?!(🇭🇰|港|(?i)HK|(?i)hong|🇸🇬|新|狮|(?i)SG|(?i)SGP|(?i)singapore|🇺🇸|美|(?i)US|(?i)states|(?i)america|🇯🇵|日|(?i)JP|(?i)japan|官网|剩余|套餐|流量|套餐|订阅|直连|(?i)GB)).)*$"
+  Exclude: &EX "^((?!(官网|剩余|套餐|流量|套餐|订阅|直连|频道|电信|(?i)GB)).)*$"
+  Combo: &CB "(?=.*(🇭🇰|港|(?i)HK|(?i)hong|🇯🇵|日|(?i)JP|(?i)japan|🇸🇬|新|狮|(?i)SG|(?i)SGP|(?i)singapore|🇺🇸|美|(?i)US|(?i)states|(?i)america|移动|联通|优选|(?i)CF|DE|CH))^((?!(官网|剩余|套餐|流量|套餐|订阅|直连|频道|下载|电信|(?i)GB|0.1|0.2|0.01)).)*$"
   
 # 代理策略组
   All: &SC {type: select, include-all: true} 
