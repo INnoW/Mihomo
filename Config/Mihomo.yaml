@@ -7,17 +7,16 @@
 rule-anchor:
   # 订阅参数锚点
   Sub_Parameters: &SP {type: http, interval: 86400, health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 600}, header: {User-Agent: ["clash.meta", "clash", "mihomo"]}}
-  Sub_Cloudflare: &CF {type: http, interval: 21600, health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300}, header: {User-Agent: ["clash", "mihomo"]}}
-  
+  Sub_Cloudflare: &CF {type: http, interval: 21600, health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300}, header: {User-Agent: ["clash.meta", "clash", "mihomo"]}}  
   # DNS参数锚点
   Dns_Default: &DF ['1.1.1.1', '114.114.114.114']
   Dns_Public: &DP ['https://dns.alidns.com/dns-query', 'https://cloudflare-dns.com/dns-query']
   Dns_Direct: &DD ['223.5.5.5', '119.29.29.29']
   
   # 节点策略锚点
-  Proxy: &S1 {type: select, proxies: [🇭🇰 香港节点, 🇸🇬 狮城节点, 🇺🇲 美国节点, 🇯🇵 日本节点, 🐽 手动切换1, 🐽 手动切换2, 🛩️ 故障转移, 🎯 DIRECT]}
-  Online: &S2 {type: select, proxies: [🛩️ 故障转移, 🇭🇰 香港节点, 🇸🇬 狮城节点, 🇺🇲 美国节点, 🇯🇵 日本节点, 🐽 手动切换1, 🐽 手动切换2, 🎯 DIRECT]}
-  Direct: &S3 {type: select, proxies: [🎯 DIRECT, 🇭🇰 香港节点, 🇸🇬 狮城节点, 🇺🇲 美国节点, 🇯🇵 日本节点, 🐽 手动切换1, 🐽 手动切换2, 🛩️ 故障转移]}
+  Proxy: &S1 {type: select, proxies: [香港节点, 狮城节点, 美国节点, 日本节点, 手动切换1,  手动切换2, 故障转移, DIRECT]}
+  Online: &S2 {type: select, proxies: [故障转移, 香港节点, 狮城节点, 美国节点, 日本节点, 手动切换1, 手动切换2, DIRECT]}
+  Direct: &S3 {type: select, proxies: [DIRECT, 香港节点, 狮城节点, 美国节点, 日本节点, 手动切换1, 手动切换2, 故障转移]}
   
   # 节点筛选锚点
   Hongkong: &HK "(?=.*(🇭🇰|港|(?i)HK|(?i)hong))^((?!(🎯|台|日|韩|新|美|0.1|0.2|0.01)).)*$"
@@ -44,12 +43,8 @@ rule-anchor:
 
 # 机场订阅(填入你的机场订阅链接，如删除机场数量需在前后代理策略组同时修改参数)
 proxy-providers:
-  airport 1: {<<: *SP,  proxy: 🎯 全球直连, url: '机场链接'}
-  airport 2: {<<: *CF,  proxy: 🎯 全球直连, url: '机场链接'}
-
-# 节点信息
-proxies:
-  - {name: 🎯 DIRECT, type: direct, udp: true}
+  airport 1: {<<: *SP,  proxy: DIRECT, url: '机场链接'}
+  airport 2: {<<: *CF,  proxy: DIRECT, url: '机场链接'}
 
 # ※※※※※※※※※※※※※※※ 核心配置 ※※※※※※※※※※※※※※※
 # 基础配置
@@ -187,14 +182,14 @@ proxy-groups:
   # - {name: ♻️ 自动选择, <<: *URL, filter: *EX}
   # - {name: 🔯 故障转移(备), <<: *FPQ, filter: *EX}
   
-  - {name: 🇭🇰 香港节点, <<: *SC, filter: *HK}
-  - {name: 🇸🇬 狮城节点, <<: *SC, filter: *SGP}
-  - {name: 🇺🇲 美国节点, <<: *SC, filter: *USA}
-  - {name: 🇯🇵 日本节点, <<: *SC, filter: *JP}
-  - {name: 🇺🇳 其他地区, <<: *SC, filter: *OR}
-  - {name: 🐽 手动切换1, <<: *SC, filter: *EX}
-  - {name: 🐽 手动切换2, <<: *SC, filter: *EX}
-  - {name: 🛩️ 故障转移, <<: *FBP, filter: *CB}
+  - {name: 香港节点, <<: *SC, filter: *HK, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png"}
+  - {name: 狮城节点, <<: *SC, filter: *SGP, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png"}
+  - {name: 美国节点, <<: *SC, filter: *USA, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png"}
+  - {name: 日本节点, <<: *SC, filter: *JP, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png"}
+  - {name: 其他地区, <<: *SC, filter: *OR, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_Nations.png"}
+  - {name: 手动切换1, <<: *SC, filter: *EX, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Static.png"}
+  - {name: 手动切换2, <<: *SC, filter: *EX, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Static.png"}
+  - {name: 故障转移, <<: *FBP, filter: *CB, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Round_Robin.png"}
 
 # ※※※※※※※※※※※※※※※ 规则匹配 ※※※※※※※※※※※※※※※
 # 规则定义
