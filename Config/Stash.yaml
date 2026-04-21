@@ -153,7 +153,7 @@ dns:
     - "rule-set:direct_domain"                                          # 真实解析  大陆常用域名数据
    
  
-# ※※※※※※※※※※※※※※※ 代理策略组 ※※※※※※※※※※※※※※※
+# ※※※※※※※※※※※※※※ 代理策略组 ※※※※※※※※※※※※※※
 # 策略组（按服务分组）
 proxy-groups:
   - {name: AI, <<: *JPA, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/AI.png"}
