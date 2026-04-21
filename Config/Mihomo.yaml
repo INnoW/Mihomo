@@ -8,6 +8,7 @@ rule-anchor:
   # 订阅参数锚点
   Sub_Parameters: &SP {type: http, interval: 86400, health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 600}, header: {User-Agent: ["clash.meta", "clash", "mihomo"]}}
   Sub_Cloudflare: &CF {type: http, interval: 21600, health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300}, header: {User-Agent: ["clash.meta", "clash", "mihomo"]}}  
+  
   # DNS参数锚点
   Dns_Default: &DF ['1.1.1.1', '114.114.114.114']
   Dns_Public: &DP ['https://dns.alidns.com/dns-query', 'https://cloudflare-dns.com/dns-query']
@@ -76,9 +77,9 @@ profile:
 #geodata-mode: true                                                      # 数据分流  使用数据集进行规则与分流匹配
 #geox-url:
 #  geosite: https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat
-#  geoip:   https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip-lite.dat
-#  mmdb:    https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/country-lite.mmdb
-#  asn:     https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/GeoLite2-ASN.mmdb
+#  geoip: https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip-lite.dat
+#  mmdb: https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/country-lite.mmdb
+#  asn: https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/GeoLite2-ASN.mmdb
 
 # 控制面板
 external-controller: 0.0.0.0:9988                                       # 面板地址
