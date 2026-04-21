@@ -14,7 +14,7 @@ rule-anchor:
   Dns_Direct: &DD ['223.5.5.5', '119.29.29.29']
   
   # 节点策略锚点
-  Proxy: &S1 {type: select, proxies: [香港节点, 狮城节点, 美国节点, 日本节点, 手动切换1,  手动切换2, 故障转移, DIRECT]}
+  Proxy: &S1 {type: select, proxies: [香港节点, 狮城节点, 美国节点, 日本节点, 手动切换1, 手动切换2, 故障转移, DIRECT]}
   Online: &S2 {type: select, proxies: [故障转移, 香港节点, 狮城节点, 美国节点, 日本节点, 手动切换1, 手动切换2, DIRECT]}
   Direct: &S3 {type: select, proxies: [DIRECT, 香港节点, 狮城节点, 美国节点, 日本节点, 手动切换1, 手动切换2, 故障转移]}
   
