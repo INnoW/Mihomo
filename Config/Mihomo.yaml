@@ -1,6 +1,6 @@
 # 名称： Mihomo Ruleset
-# 版本： Ver.5.1
-# 日期： 2026年4月21日
+# 版本： Ver.5.2
+# 日期： 2026年5月2日
 # 地址： https://github.com/INnoW/Mihomo
 # 说明： ①本文件适用于Mihomo核心的工具使用，如：OpenWrt（OpenClash/Nikki 插件）、Stash、FlClash； ②使用前需补充完整 “订阅链接” 与 “机场名”，并将 “nameserver” 修改为运营商提供的 DNS 地址;
 # ※※※※※※※※※※※※※※※ 锚点定义 ※※※※※※※※※※※※※※※
@@ -15,9 +15,9 @@ rule-anchor:
   Dns_Direct: &DD ['223.5.5.5', '119.29.29.29']
   
   # 节点策略锚点
-  Proxy: &S1 {type: select, proxies: [香港节点, 狮城节点, 美国节点, 日本节点, 其他地区, 手动切换1, 手动切换2, 故障转移, DIRECT]}
-  Online: &S2 {type: select, proxies: [故障转移, 香港节点, 狮城节点, 美国节点, 日本节点, 其他地区, 手动切换1, 手动切换2, DIRECT]}
-  Direct: &S3 {type: select, proxies: [DIRECT, 香港节点, 狮城节点, 美国节点, 日本节点, 其他地区, 手动切换1, 手动切换2, 故障转移]}
+  Proxy: &S1 {type: select, proxies: [香港节点, 狮城节点, 美国节点, 日本节点, 其他地区, 手动切换1, 手动切换2, 故障转移, 直连节点]}
+  Online: &S2 {type: select, proxies: [故障转移, 香港节点, 狮城节点, 美国节点, 日本节点, 其他地区, 手动切换1, 手动切换2, 直连节点]}
+  Direct: &S3 {type: select, proxies: [直连节点, 香港节点, 狮城节点, 美国节点, 日本节点, 其他地区, 手动切换1, 手动切换2, 故障转移]}
   
   # 节点筛选锚点
   Hongkong: &HK "(?=.*(🇭🇰|港|(?i)HK|(?i)hong))^((?!(🎯|台|日|韩|新|美|0.1|0.2|0.01)).)*$"
@@ -29,9 +29,10 @@ rule-anchor:
   Combo: &CB "(?=.*(🇭🇰|港|(?i)HK|(?i)hong|🇯🇵|日|(?i)JP|(?i)japan|🇸🇬|新|狮|(?i)SG|(?i)SGP|(?i)singapore|🇺🇸|美|(?i)US|(?i)states|(?i)america|移动|联通|优选|(?i)CF|DE|CH))^((?!(🎯|官网|剩余|套餐|流量|套餐|订阅|直连|频道|下载|电信|软件|(?i)GB|0.1|0.2|0.01)).)*$"
 
 # 代理策略组
-  All: &SC {type: select, include-all: true} 
+  All: &SC {type: select, include-all: true}
   airport 1: &A1 {type: select, use: [airport 1]}
   airport 2: &A2 {type: select, use: [airport 2]}
+  Direct_test: &DT {type: direct, udp: true, interval: 3600, lazy: true, url: 'https://www.gstatic.com/generate_204'} 
   Url_test: &URL {type: url-test, include-all: true, interval: 600, lazy: true, url: 'https://www.gstatic.com/generate_204'}
   FallBack_airport 1: &FA1 {type: fallback, use: [airport 1], interval: 600, lazy: true, url: 'https://www.gstatic.com/generate_204'}
   FallBack_airport 2: &FA2 {type: fallback, use: [airport 2], interval: 600, lazy: true, url: 'https://www.gstatic.com/generate_204'}
@@ -48,8 +49,13 @@ proxy-providers:
   airport 2: {<<: *CF,  proxy: DIRECT, url: '机场链接'}
 
 # ※※※※※※※※※※※※※※※ 核心配置 ※※※※※※※※※※※※※※※
+# 节点信息
+proxies:
+  - {name: 直连节点, <<: *DT, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Direct.png"}
+
 # 基础配置
 # interface-name: en0                                                   # 分流指定  强制代理使用en0接口来收发流量
+# global-client-fingerprint: chrome                                     # 流量伪装  模仿Chrome浏览器的TLS握手特征，增加流量被识别的难度（语法已弃用）
 
 port: 7890                                                              # 监听端口  混合代理端口
 socks-port: 7891                                                        # 监听端口  Socks端口
@@ -63,7 +69,6 @@ unified-delay: true                                                     # 统一
 tcp-concurrent: true                                                    # 并发连接  提升多任务性能
 log-level: info                                                         # 日志级别  silent（静默）/ error（错误）/ warning（警告）/ info（信息）/ debug（调试）
 find-process-mode: 'off'                                                # 性能优化  进程匹配
-global-client-fingerprint: chrome                                       # 流量伪装  模仿Chrome浏览器的TLS握手特征，增加流量被识别的难度
 keep-alive-idle: 600                                                    # TCP保活  TCP连接空闲 600秒 (10分钟) 后，开始发送“心跳包”检测连接是否存活
 keep-alive-interval: 15                                                 # TCP保活  如果连接持续空闲，每隔 15秒 发送一次探测包，直到收到回应或达到重试次数上限
 disable-keep-alive: false                                               # TCP保活  对空闲连接进行保活检测
