@@ -1,5 +1,5 @@
 # 名称： Mihomo Ruleset
-# 版本： Ver.5.3
+# 版本： Ver.5.4
 # 日期： 2026年5月3日
 # 地址： https://github.com/INnoW/Mihomo
 # 说明： ①本文件适用于Mihomo核心的工具使用，如：OpenWrt（OpenClash/Nikki 插件）、Stash、FlClash； ②使用前需补充完整 “订阅链接” 与 “机场名”，并将 “nameserver” 修改为运营商提供的 DNS 地址;
@@ -157,42 +157,42 @@ dns:
 # ※※※※※※※※※※※※※※ 代理策略组 ※※※※※※※※※※※※※※
 # 策略组（按服务分组）
 proxy-groups:
-  - {name: AI, <<: *S1, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/AI.png"}
-  - {name: YouTube, <<: *S1, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png"}
-  - {name: Emby, <<: *S1, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Emby.png"}
+  - {name: AI, <<: *S1, icon: "https://raw.githubusercontent.com/INnoW/Qure-Icon/refs/heads/master/IconSet/Color/AI.png"}
+  - {name: YouTube, <<: *S1, icon: "https://raw.githubusercontent.com/INnoW/Qure-Icon/refs/heads/master/IconSet/Color/YouTube.png"}
+  - {name: Emby, <<: *S1, icon: "https://raw.githubusercontent.com/INnoW/Qure-Icon/refs/heads/master/IconSet/Color/Emby.png"}
   - {name: Forluma 1, <<: *S1, icon: "https://raw.githubusercontent.com/INnoW/Mihomo/refs/heads/main/Icon/Forluma%201.png"}
-  - {name: Apple TV, <<: *S1, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple_TV.png"}
-  - {name: Apple, <<: *S3, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple_2.png"}
-  - {name: TikTok, <<: *S1, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TikTok.png"}
-  - {name: Netflix, <<: *S1, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Netflix.png"}
-  - {name: Disney, <<: *S1, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Disney.png"}
-  - {name: 游戏平台, <<: *S1, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Game.png"}
-  - {name: 国外媒体, <<: *S1, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/AfreecaTV.png"}
-  - {name: Google Voice, <<: *S1, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google.png"}
-  - {name: Google, <<: *S2, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png"}
-  - {name: Twitter(X), <<: *S2, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Twitter.png"}
-  - {name: Telegram, <<: *S2, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png"}
-  - {name: GitHub, <<: *S2, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/GitHub.png"}
-  - {name: OneDrive, <<: *S2, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/OneDrive.png"}
-  - {name: Microsoft, <<: *S3, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Microsoft.png"}
-  - {name: Speedtest, <<: *S3, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Speedtest.png"}
-  - {name: 国内直连, <<: *S3, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available_1.png"}
-  - {name: 全局代理, <<: *S2, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Rocket.png"}
-  - {name: 漏网之鱼, <<: *S2, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Mouse.png"}
+  - {name: Apple TV, <<: *S1, icon: "https://raw.githubusercontent.com/INnoW/Qure-Icon/refs/heads/master/IconSet/Color/Apple_TV.png"}
+  - {name: Apple, <<: *S3, icon: "https://raw.githubusercontent.com/INnoW/Qure-Icon/refs/heads/master/IconSet/Color/Apple_2.png"}
+  - {name: TikTok, <<: *S1, icon: "https://raw.githubusercontent.com/INnoW/Qure-Icon/refs/heads/master/IconSet/Color/TikTok.png"}
+  - {name: Netflix, <<: *S1, icon: "https://raw.githubusercontent.com/INnoW/Qure-Icon/refs/heads/master/IconSet/Color/Netflix.png"}
+  - {name: Disney, <<: *S1, icon: "https://raw.githubusercontent.com/INnoW/Qure-Icon/refs/heads/master/IconSet/Color/Disney.png"}
+  - {name: 游戏平台, <<: *S1, icon: "https://raw.githubusercontent.com/INnoW/Qure-Icon/refs/heads/master/IconSet/Color/Game.png"}
+  - {name: 国外媒体, <<: *S1, icon: "https://raw.githubusercontent.com/INnoW/Qure-Icon/refs/heads/master/IconSet/Color/AfreecaTV.png"}
+  - {name: Google Voice, <<: *S1, icon: "https://raw.githubusercontent.com/INnoW/Qure-Icon/refs/heads/master/IconSet/Color/Google.png"}
+  - {name: Google, <<: *S2, icon: "https://raw.githubusercontent.com/INnoW/Qure-Icon/refs/heads/master/IconSet/Color/Google_Search.png"}
+  - {name: Twitter(X), <<: *S2, icon: "https://raw.githubusercontent.com/INnoW/Qure-Icon/refs/heads/master/IconSet/Color/Twitter.png"}
+  - {name: Telegram, <<: *S2, icon: "https://raw.githubusercontent.com/INnoW/Qure-Icon/refs/heads/master/IconSet/Color/Telegram.png"}
+  - {name: GitHub, <<: *S2, icon: "https://raw.githubusercontent.com/INnoW/Qure-Icon/refs/heads/master/IconSet/Color/GitHub.png"}
+  - {name: OneDrive, <<: *S2, icon: "https://raw.githubusercontent.com/INnoW/Qure-Icon/refs/heads/master/IconSet/Color/OneDrive.png"}
+  - {name: Microsoft, <<: *S3, icon: "https://raw.githubusercontent.com/INnoW/Qure-Icon/refs/heads/master/IconSet/Color/Microsoft.png"}
+  - {name: Speedtest, <<: *S3, icon: "https://raw.githubusercontent.com/INnoW/Qure-Icon/refs/heads/master/IconSet/Color/Speedtest.png"}
+  - {name: 国内直连, <<: *S3, icon: "https://raw.githubusercontent.com/INnoW/Qure-Icon/refs/heads/master/IconSet/Color/Available_1.png"}
+  - {name: 全局代理, <<: *S2, icon: "https://raw.githubusercontent.com/INnoW/Qure-Icon/refs/heads/master/IconSet/Color/Rocket.png"}
+  - {name: 漏网之鱼, <<: *S2, icon: "https://raw.githubusercontent.com/INnoW/Qure-Icon/refs/heads/master/IconSet/Color/Mouse.png"}
 
 # 策略组（按区域分组）
   # - {name: ♻️ 自动选择, <<: *URL, filter: *EX}
   # - {name: 🔯 故障转移(备), <<: *FPQ, filter: *EX}
   
-  - {name: 香港节点, <<: *SC, filter: *HK, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png"}
-  - {name: 狮城节点, <<: *SC, filter: *SG, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png"}
-  - {name: 美国节点, <<: *SC, filter: *US, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png"}
-  - {name: 日本节点, <<: *SC, filter: *JP, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png"}
-  - {name: 其他地区, <<: *SC, filter: *OR, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_Nations.png"}
-  - {name: 手动切换1, <<: *SC, filter: *EX, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Static.png"}
-  - {name: 手动切换2, <<: *SC, filter: *EX, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Static.png"}
-  - {name: 出站策略, <<: *S4, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Proxy.png"}
-  - {name: 故障转移, <<: *FBP, filter: *CB, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Round_Robin.png"}
+  - {name: 香港节点, <<: *SC, filter: *HK, icon: "https://raw.githubusercontent.com/INnoW/Qure-Icon/refs/heads/master/IconSet/Color/Hong_Kong.png"}
+  - {name: 狮城节点, <<: *SC, filter: *SG, icon: "https://raw.githubusercontent.com/INnoW/Qure-Icon/refs/heads/master/IconSet/Color/Singapore.png"}
+  - {name: 美国节点, <<: *SC, filter: *US, icon: "https://raw.githubusercontent.com/INnoW/Qure-Icon/refs/heads/master/IconSet/Color/United_States.png"}
+  - {name: 日本节点, <<: *SC, filter: *JP, icon: "https://raw.githubusercontent.com/INnoW/Qure-Icon/refs/heads/master/IconSet/Color/Japan.png"}
+  - {name: 其他地区, <<: *SC, filter: *OR, icon: "https://raw.githubusercontent.com/INnoW/Qure-Icon/refs/heads/master/IconSet/Color/United_Nations.png"}
+  - {name: 手动切换1, <<: *SC, filter: *EX, icon: "https://raw.githubusercontent.com/INnoW/Qure-Icon/refs/heads/master/IconSet/Color/Static.png"}
+  - {name: 手动切换2, <<: *SC, filter: *EX, icon: "https://raw.githubusercontent.com/INnoW/Qure-Icon/refs/heads/master/IconSet/Color/Static.png"}
+  - {name: 出站策略, <<: *S4, icon: "https://raw.githubusercontent.com/INnoW/Qure-Icon/refs/heads/master/IconSet/Color/Proxy.png"}
+  - {name: 故障转移, <<: *FBP, filter: *CB, icon: "https://raw.githubusercontent.com/INnoW/Qure-Icon/refs/heads/master/IconSet/Color/Round_Robin.png"}
 
 # ※※※※※※※※※※※※※※※ 规则匹配 ※※※※※※※※※※※※※※※
 # 规则定义
