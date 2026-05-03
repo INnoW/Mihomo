@@ -1,6 +1,6 @@
 # 名称： Mihomo Ruleset
-# 版本： Ver.5.2
-# 日期： 2026年5月2日
+# 版本： Ver.5.3
+# 日期： 2026年5月3日
 # 地址： https://github.com/INnoW/Mihomo
 # 说明： ①本文件适用于Mihomo核心的工具使用，如：OpenWrt（OpenClash/Nikki 插件）、Stash、FlClash； ②使用前需补充完整 “订阅链接” 与 “机场名”，并将 “nameserver” 修改为运营商提供的 DNS 地址;
 # ※※※※※※※※※※※※※※※ 锚点定义 ※※※※※※※※※※※※※※※
@@ -18,6 +18,7 @@ rule-anchor:
   Proxy: &S1 {type: select, proxies: [香港节点, 狮城节点, 美国节点, 日本节点, 其他地区, 手动切换1, 手动切换2, 故障转移, 直连节点]}
   Online: &S2 {type: select, proxies: [故障转移, 香港节点, 狮城节点, 美国节点, 日本节点, 其他地区, 手动切换1, 手动切换2, 直连节点]}
   Direct: &S3 {type: select, proxies: [直连节点, 香港节点, 狮城节点, 美国节点, 日本节点, 其他地区, 手动切换1, 手动切换2, 故障转移]}
+  Outbound: &S4 {type: select, interval: 3600, lazy: true, url: 'https://www.gstatic.com/generate_204',proxies: [DIRECT, PASS, REJECT, REJECT-DROP]}
   
   # 节点筛选锚点
   Hongkong: &HK "(?=.*(🇭🇰|港|(?i)HK|(?i)hong))^((?!(🎯|台|日|韩|新|美|0.1|0.2|0.01)).)*$"
@@ -49,10 +50,6 @@ proxy-providers:
   airport 2: {<<: *CF,  proxy: DIRECT, url: '机场链接'}
 
 # ※※※※※※※※※※※※※※※ 核心配置 ※※※※※※※※※※※※※※※
-# 节点信息
-proxies:
-  - {name: 直连节点, <<: *DT, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Direct.png"}
-
 # 基础配置
 # interface-name: en0                                                   # 分流指定  强制代理使用en0接口来收发流量
 # global-client-fingerprint: chrome                                     # 流量伪装  模仿Chrome浏览器的TLS握手特征，增加流量被识别的难度（语法已弃用）
@@ -194,6 +191,7 @@ proxy-groups:
   - {name: 其他地区, <<: *SC, filter: *OR, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_Nations.png"}
   - {name: 手动切换1, <<: *SC, filter: *EX, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Static.png"}
   - {name: 手动切换2, <<: *SC, filter: *EX, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Static.png"}
+  - {name: 出站策略, <<: *S4, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Proxy.png"}
   - {name: 故障转移, <<: *FBP, filter: *CB, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Round_Robin.png"}
 
 # ※※※※※※※※※※※※※※※ 规则匹配 ※※※※※※※※※※※※※※※
