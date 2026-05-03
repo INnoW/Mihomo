@@ -25,7 +25,8 @@ rule-anchor:
   S2_Auto: &S2A {type: select, proxies: [手动切换2, 香港节点, 狮城节点, 美国节点, 日本节点, 其他地区, 手动切换1, 故障转移, DIRECT], ssid-policy: {SSID: DIRECT, SSID_5G: DIRECT, default: 手动切换2, cellular: 手动切换2}}
   FB_Auto: &FBA {type: select, proxies: [故障转移, 香港节点, 狮城节点, 美国节点, 日本节点, 其他地区, 手动切换1, 手动切换2, DIRECT], ssid-policy: {SSID: DIRECT, SSID_5G: DIRECT, default: 故障转移, cellular: 故障转移}}
   DR_Auto: &DRA {type: select, proxies: [DIRECT, 香港节点, 狮城节点, 美国节点, 日本节点, 其他地区, 手动切换1, 手动切换2, 故障转移], ssid-policy: {SSID: DIRECT, SSID_5G: DIRECT}}
- 
+  Outbound: &S4 {type: select, interval: 3600, lazy: true, url: 'https://www.gstatic.com/generate_204',proxies: [DIRECT, REJECT, REJECT-DROP]}
+
   # 节点筛选锚点
   Hongkong: &HK "(?=.*(🇭🇰|港|(?i)HK|(?i)hong))^((?!(🎯|台|日|韩|新|美|0.1|0.2|0.01)).)*$"
   Singapore: &SG "(?=.*(🇸🇬|新|狮|(?i)SG|(?i)SGP|(?i)singapore))^((?!(🎯|港|台|日|韩|美|0.1|0.2|0.01)).)*$"
@@ -191,6 +192,7 @@ proxy-groups:
   - {name: 其他地区, <<: *SC, filter: *OR, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_Nations.png"}
   - {name: 手动切换1, <<: *SC, filter: *EX, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Static.png"}
   - {name: 手动切换2, <<: *SC, filter: *EX, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Static.png"}
+  - {name: 出站策略, <<: *S4, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Proxy.png"}
   - {name: 故障转移, <<: *FBP, filter: *CB, icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Round_Robin.png"}
 
 # ※※※※※※※※※※※※※※※ 规则匹配 ※※※※※※※※※※※※※※※
