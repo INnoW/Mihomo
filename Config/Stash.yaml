@@ -1,12 +1,13 @@
 # 名称： Stash Config
-# 版本： Ver.2.0
-# 日期： 2026年5月3日
+# 版本： Ver.2.1
+# 日期： 2026年5月25日
 # 地址： https://github.com/INnoW/Mihomo
 # 说明： ①本文件适用于Stash工具使用;②使用前需补充完整 “订阅链接” 与 “机场名”，并将 “nameserver” 修改为运营商提供的 DNS 地址;
 
 # ※※※※※※※※※※※※※※※ 锚点定义 ※※※※※※※※※※※※※※※
 rule-anchor:
   # 订阅参数锚点
+  Sub_Once: &SO {type: http, health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 600}, header: {User-Agent: ["clash.meta", "clash", "mihomo"]}}
   Sub_Parameters: &SP {type: http, interval: 86400, health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 600}, header: {User-Agent: ["clash.meta", "clash", "mihomo"]}}
   Sub_Cloudflare: &CF {type: http, interval: 21600, health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300}, header: {User-Agent: ["clash.meta", "clash", "mihomo"]}}
   
@@ -28,13 +29,13 @@ rule-anchor:
   Outbound: &S4 {type: select, interval: 3600, lazy: true, url: 'https://www.gstatic.com/generate_204',proxies: [DIRECT, REJECT, REJECT-DROP]}
 
   # 节点筛选锚点
-  Hongkong: &HK "(?=.*(🇭🇰|港|(?i)HK|(?i)hong))^((?!(🎯|台|日|韩|新|美|0.1|0.2|0.01)).)*$"
-  Singapore: &SG "(?=.*(🇸🇬|新|狮|(?i)SG|(?i)SGP|(?i)singapore))^((?!(🎯|港|台|日|韩|美|0.1|0.2|0.01)).)*$"
-  America: &US "(?=.*(🇺🇸|美|(?i)US|(?i)states|(?i)america))^((?!(🎯|港|台|日|韩|新|0.1|0.2|0.01)).)*$"
-  Japan: &JP "(?=.*(🇯🇵|日|(?i)JP(?i)japan))^((?!(🎯|港|台|韩|新|美|0.1|0.2|0.01)).)*$"
-  Other: &OR "^((?!(🇭🇰|港|(?i)HK|(?i)hong|🇸🇬|新|狮|(?i)SG|(?i)SGP|(?i)singapore|🇺🇸|美|(?i)US|(?i)states|(?i)america|🇯🇵|日|(?i)JP|(?i)japan|🎯|官网|剩余|套餐|流量|套餐|订阅|直连|优选|软件|(?i)GB|CF|0.1|0.2|0.01)).)*$"
+  Hongkong: &HK "(?=.*(🇭🇰|港|(?i)HK|(?i)hong))^((?!(🎯|台|日|韩|新|美|0.1|0.2|0.5|0.01)).)*$"
+  Singapore: &SG "(?=.*(🇸🇬|新|狮|(?i)SG|(?i)SGP|(?i)singapore))^((?!(🎯|港|台|日|韩|美|0.1|0.2|0.5|0.01)).)*$"
+  America: &US "(?=.*(🇺🇸|美|(?i)US|(?i)states|(?i)america))^((?!(🎯|港|台|日|韩|新|0.1|0.2|0.5|0.01)).)*$"
+  Japan: &JP "(?=.*(🇯🇵|日|(?i)JP(?i)japan))^((?!(🎯|港|台|韩|新|美|0.1|0.2|0.5|0.01)).)*$"
+  Other: &OR "^((?!(🇭🇰|港|(?i)HK|(?i)hong|🇸🇬|新|狮|(?i)SG|(?i)SGP|(?i)singapore|🇺🇸|美|(?i)US|(?i)states|(?i)america|🇯🇵|日|(?i)JP|(?i)japan|🎯|官网|剩余|套餐|流量|套餐|订阅|直连|优选|软件|(?i)GB|CF|0.1|0.2|0.5|0.01)).)*$"
   Exclude: &EX "^((?!(🎯|官网|剩余|套餐|流量|套餐|订阅|直连|频道|电信|软件|(?i)GB)).)*$"
-  Combo: &CB "(?=.*(🇭🇰|港|(?i)HK|(?i)hong|🇯🇵|日|(?i)JP|(?i)japan|🇸🇬|新|狮|(?i)SG|(?i)SGP|(?i)singapore|🇺🇸|美|(?i)US|(?i)states|(?i)america|移动|联通|优选|(?i)CF|DE|CH))^((?!(🎯|官网|剩余|套餐|流量|套餐|订阅|直连|频道|下载|电信|软件|实验|(?i)GB|0.1|0.2|0.01)).)*$"
+  Combo: &CB "(?=.*(🇭🇰|港|(?i)HK|(?i)hong|🇯🇵|日|(?i)JP|(?i)japan|🇸🇬|新|狮|(?i)SG|(?i)SGP|(?i)singapore|🇺🇸|美|(?i)US|(?i)states|(?i)america|移动|联通|优选|(?i)CF|DE|CH))^((?!(🎯|官网|剩余|套餐|流量|套餐|订阅|直连|频道|下载|电信|软件|实验|(?i)GB|0.1|0.2|0.5|0.01)).)*$"
 
   # 代理策略组锚点
   All: &SC {type: select, include-all: true} 
@@ -52,8 +53,9 @@ rule-anchor:
 
 # 机场订阅(填入你的机场订阅链接，如删除机场数量需在前后代理策略组同时修改参数)
 proxy-providers:
-  airport 1: {<<: *SP,  proxy: DIRECT, url: '机场链接'}
-  airport 2: {<<: *CF,  proxy: DIRECT, url: '机场链接'}
+  airport 1: {<<: *SO,  proxy: DIRECT, url: '机场链接'}
+  airport 2: {<<: *SP,  proxy: DIRECT, url: '机场链接'}
+  airport 3: {<<: *CF,  proxy: DIRECT, url: '机场链接'}
 
 # ※※※※※※※※※※※※※※※ 核心配置 ※※※※※※※※※※※※※※※
 # 基础配置
